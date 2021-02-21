@@ -1,0 +1,47 @@
+﻿@model MovieBlog.Models.ViewModels.UpdateMovie
+@{
+    ViewBag.Title = "MovieDetails";
+}
+
+<h2>Movie : @Model.Movie.Title</h2>
+@Html.ActionLink("Back to List", "ListMovies", "Movie", new { }, null)
+
+<form>
+    <label for="">Title :</label>
+    <input id="Title" name="Title" type="text" value="@Model.Movie.Title" />
+    <label for="">Year released : </label>
+    <input id="Yearreleased" name="YearReleased" type="text" value="@Model.Movie.YearReleased" />
+    <label for="">Review:</label>
+    <textarea id="Review" name="Review">@Model.Movie.Review</textarea>
+    <label>Select the Director : </label>
+    <select name="DirectorID" value=@Model.Movie.DirectorID>
+        @foreach (var director in @Model.Directors)
+        {
+            <option value="@director.DirectorID">@director.FirstName @director.LastName</option>
+        }
+
+    </select>
+</form>
+<div>
+    <h4>Actors in Movies:</h4>
+    <div>
+        @foreach (var actor in Model.ActorsinMovie)
+        {
+            <div>
+                @Html.ActionLink(
+                actor.FirstName + " "+ actor.LastName,
+                "Details",
+                "Movie",
+                new { id = actor.ActorID },
+                new { })
+
+                @Html.ActionLink(
+               "[x]",
+               "RemoveMovieforActor",
+               "Actor",
+               new { Id = actor.ActorID },
+               new { @class = "text-danger" })
+            </div>
+        }
+    </div>
+

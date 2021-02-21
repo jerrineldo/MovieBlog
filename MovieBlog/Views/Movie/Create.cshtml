@@ -1,0 +1,26 @@
+﻿@model MovieBlog.Models.ViewModels.ShowMovie
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Movie</h2>
+
+@Html.ActionLink("Back to List", "ListMovies", "Movie", new { }, null)
+
+<form action="/Movie/Create" method="POST" name="movieform">
+    <label for="">Enter the Title :</label>
+    <input id="Title" name="Title" type="text" />
+    <label for="">Enter the year released : </label>
+    <input id="Yearreleased" name="YearReleased" type="text" />
+    <label for="">Review:</label>
+    <textarea id="Review" name="Review"></textarea>
+    <label>Select the Director : </label>
+    <select name="DirectorID">
+                @foreach (var director in Model.Directors)
+                {
+                    <option value="@director.DirectorID">@director.FirstName @director.LastName</option>
+                }
+
+    </select>
+    <input type="submit" value="Create Actor" />
+</form>

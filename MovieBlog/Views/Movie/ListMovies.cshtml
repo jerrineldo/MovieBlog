@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MovieBlog.Models.MovieDto>
+@{
+    ViewBag.Title = "ListMovies";
+}
+
+<h2>List of Movies</h2>
+@Html.ActionLink("Create New Movie", "Create", "Movie", new { }, null)
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearReleased)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Review)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearReleased)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Review)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ActorDetails", "Actor", new { id = item.MovieID }, null)
+                @Html.ActionLink("Details", "MovieDetails", "Movie", new { id = item.MovieID }, null)
+            </td>
+        </tr>
+    }
+</table>

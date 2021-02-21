@@ -1,0 +1,25 @@
+﻿@model MovieBlog.Models.ActorDto
+@{
+    ViewBag.Title = "ActorDetails";
+}
+
+<h2>Update Actor</h2>
+
+@Html.ActionLink("Back to List", "ListActors", "Actor", new { }, null)
+<div>
+    <form method="POST" action="/Actor/UpdateActor/@Model.ActorID">
+        <label>First Name : </label>
+        <input type="text" value="@Model.FirstName" name="FirstName" />
+        <label>Last Name : </label>
+        <input type="text" value="@Model.LastName" name="LastName" />
+        <label>Country : </label>
+        <input type="text" value="@Model.Country" name="Country" />
+        <label>Bio :</label>
+        <textarea name="Bio">@Model.Bio</textarea>
+        <input type="submit" value="Update Actor" />
+        <input type="number" name="ActorID" value="@Model.ActorID" style="display:none;" />
+
+    </form>
+    
+</div>
+

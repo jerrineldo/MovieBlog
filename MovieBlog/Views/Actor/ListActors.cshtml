@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MovieBlog.Models.ActorDto>
+@{
+    ViewBag.Title = "ListActors";
+}
+
+<h2>List of Actors</h2>
+@Html.ActionLink("Create New Actor", "Create", "Actor", new {}, null)
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bio)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bio)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ActorDetails", "Actor", new { id = item.ActorID }, null)
+                @Html.ActionLink("Details", "UpdateActor", "Actor", new { id = item.ActorID }, null)
+            </td>
+        </tr>
+    }
+</table>
