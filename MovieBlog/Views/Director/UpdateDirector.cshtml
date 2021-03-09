@@ -1,0 +1,37 @@
+﻿@model MovieBlog.Models.Director
+
+@{
+    ViewBag.Title = "UpdateDirector";
+}
+
+@Html.ActionLink("Back to List", "ListDirectors", "Director", new { }, null)
+<h2 class="center">Update : @Model.FirstName @Model.LastName</h2>
+
+<div class="updatedirector">
+    <form action="/Director/UpdateDirector/@Model.DirectorID" method="POST" name="directorForm" enctype="multipart/form-data">
+        <div class="form_inputfield center">
+            <label for="FirstName">First Name :</label>
+            <input id="FirstName" name="FirstName" type="text" value="@Model.FirstName" />
+        </div>
+        <div class="form_inputfield center">
+            <label for="LastName">Last Name : </label>
+            <input id="LastName" name="LastName" type="text" value="@Model.LastName" />
+        </div>
+        <div class="form_inputfield center">
+            <label for="">Country : </label>
+            <input id="Country" name="Country" type="text" value="@Model.Country" />
+        </div>
+        <div class="form_inputfield center">
+            <label for="Bio">Bio:</label>
+            <textarea id="Bio" name="Bio">@Model.Bio</textarea>
+        </div>
+        <input type="number" name="DirectorID" value="@Model.DirectorID" style="display:none;" />
+        <div class="center">
+            <input type="submit" value="Save" />
+        </div>
+        <div  class="form_inputfield center">
+            <label>Picture:</label>
+                <input type="file" name="DirectorPic" id="DirectorPic" class="choosefile"/>
+        </div>
+    </form>
+</div>

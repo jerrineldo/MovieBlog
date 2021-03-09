@@ -114,3 +114,5 @@ C:\Users\Jerrin Eldo\source\repos\MovieBlog\MovieBlog\obj\Debug\MovieBlog.dll
 C:\Users\Jerrin Eldo\source\repos\MovieBlog\MovieBlog\obj\Debug\MovieBlog.pdb
 C:\Users\Jerrin Eldo\source\repos\MovieBlog\MovieBlog\obj\Debug\MovieBlog.Migrations.MovieFebruary12.resources
 C:\Users\Jerrin Eldo\source\repos\MovieBlog\MovieBlog\obj\Debug\MovieBlog.csproj.GenerateResource.cache
+C:\Users\Jerrin Eldo\source\repos\MovieBlog\MovieBlog\obj\Debug\MovieBlog.Migrations.March7.resources
+C:\Users\Jerrin Eldo\source\repos\MovieBlog\MovieBlog\obj\Debug\MovieBlog.Migrations.Jerrin.resources

@@ -3,18 +3,30 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create Actor</h2>
+<h2 class="center">Create Actor</h2>
 
 @Html.ActionLink("Back to List", "ListActors", "Actor", new { }, null)
 
-<form action="/actor/create" method="POST" name="actorform">
-    <label for="actorform__firstname">Enter the first name :</label>
-    <input id="FirstName" name="FirstName" type="text" />
-    <label for="actorform__lastname">Enter the last name :</label>
-    <input id="LastName" name="LastName" type="text" />
-    <label for="actorform__country">Country :</label>
-    <input id="Country" name="Country" type="text" />
-    <label for="actorform__actorreview">Review:</label>
-    <textarea id="Bio" name="Bio"></textarea>
-    <input type="submit" value="submit" />
-</form>
+<div class="updateactor">
+    <form action="/actor/create" method="POST" name="actorform">
+        <div class="form_inputfield center">
+            <label for="actorform__firstname">First name :</label>
+            <input id="FirstName" name="FirstName" type="text" />
+        </div>
+        <div class="form_inputfield center">
+            <label for="actorform__lastname">Last name :</label>
+            <input id="LastName" name="LastName" type="text" />
+        </div>
+        <div class="form_inputfield center">
+            <label for="actorform__country">Country :</label>
+            <input id="Country" name="Country" type="text" />
+        </div>
+        <div class="form_inputfield center">
+            <label for="actorform__actorreview">Review:</label>
+            <textarea id="Bio" name="Bio"></textarea>
+        </div>
+        <div class="form_inputfield center">
+            <input type="submit" value="Create Actor" />
+        </div>
+    </form>
+</div>

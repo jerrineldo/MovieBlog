@@ -238,7 +238,7 @@ namespace MovieBlog.Controllers
         /// </example>
 
         [HttpPost]
-        public ActionResult UpdateActor(int id, Actor ActorInfo)
+        public ActionResult UpdateActor(int id, Actor ActorInfo, HttpPostedFileBase ActorPic)
         {
             string url = "ActorData/UpdateActor/" + id;
             HttpContent content = new StringContent(jss.Serialize(ActorInfo));
@@ -247,6 +247,16 @@ namespace MovieBlog.Controllers
 
             if (response.IsSuccessStatusCode)
             {
+                //only attempt to send player picture data if we have it
+                if (ActorPic != null)
+                {
+                    //Send over image data for player
+                    url = "ActorData/UpdateActorPic/" + id;
+                    MultipartFormDataContent requestcontent = new MultipartFormDataContent();
+                    HttpContent imagecontent = new StreamContent(ActorPic.InputStream);
+                    requestcontent.Add(imagecontent, "ActorPic", ActorPic.FileName);
+                    response = client.PostAsync(url, requestcontent).Result;
+                }
                 return RedirectToAction("UpdateActor", new { id = id });
             }
             else
@@ -309,6 +319,11 @@ namespace MovieBlog.Controllers
             {
                 return RedirectToAction("Error");
             }
+        }
+
+        public ActionResult Error()
+        {
+            return View();
         }
     }
 }

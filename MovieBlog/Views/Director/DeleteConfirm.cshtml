@@ -1,0 +1,42 @@
+﻿@model MovieBlog.Models.DirectorDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+
+<h3>Are you sure you want to delete this Director?</h3>
+<div>
+    <dl>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName) :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName) :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Country) :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bio) :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Bio)
+        </dd>
+
+    </dl>
+    <form action="/Director/Delete/@Model.DirectorID" method="POST">
+        <input type="submit" value="Delete" />
+    </form>
+    @Html.ActionLink("Back to List", "ListDirectors", "Director", new { }, null)
+</div>

@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create a new Genre</h2>
+
+@Html.ActionLink("Back to List", "ListGenres", "Genre",  new { }, null)
+
+<form action="/Genre/Create" method="POST" name="genreForm">
+    <label for="">Enter the Name :</label>
+    <input id="GenreName" name="GenreName" type="text" />
+    <input type="submit" value="Create Genre" />
+</form>

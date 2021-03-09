@@ -9,6 +9,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MovieBlog.Models;
+using System.Web;
+using System.IO;
+using System.Diagnostics;
 
 namespace MovieBlog.Controllers
 {
@@ -39,6 +42,8 @@ namespace MovieBlog.Controllers
                     Country = Actor.Country,
                     FirstName = Actor.FirstName,
                     LastName = Actor.LastName,
+                    ActorHasPic = Actor.ActorHasPic,
+                    PicExtension = Actor.PicExtension,
                     Bio = Actor.Bio
                 };
                 ActorDtos.Add(NewActor);
@@ -70,6 +75,8 @@ namespace MovieBlog.Controllers
                 Country = Actor.Country,
                 FirstName = Actor.FirstName,
                 LastName = Actor.LastName,
+                ActorHasPic = Actor.ActorHasPic,
+                PicExtension = Actor.PicExtension,
                 Bio = Actor.Bio
             };
             return Ok(NewActor);
@@ -100,6 +107,8 @@ namespace MovieBlog.Controllers
                     Title = Movie.Title,
                     YearReleased = Movie.YearReleased,
                     Review = Movie.Review,
+                    MovieHasPic = Movie.MovieHasPic,
+                    PicExtension = Movie.PicExtension,
                     DirectorID = Movie.DirectorID
                 };
                 MovieDtos.Add(NewMovie);
@@ -133,6 +142,8 @@ namespace MovieBlog.Controllers
                     Title = Movie.Title,
                     YearReleased = Movie.YearReleased,
                     Review = Movie.Review,
+                    MovieHasPic = Movie.MovieHasPic,
+                    PicExtension = Movie.PicExtension,
                     DirectorID = Movie.DirectorID
                 };
                 MovieDtos.Add(NewMovie);
@@ -205,6 +216,79 @@ namespace MovieBlog.Controllers
             }
         }
 
+        /// <summary>
+        /// Receives Actor picture data, uploads it to the webserver and updates the actor's HasPic option
+        /// </summary>
+        /// <param name="id">the actor id</param>
+        /// <returns>status code 200 if successful.</returns>
+        /// <example>
+        /// curl -F actorpic=@file.jpg "https://localhost:xx/api/ActorData/UpdateActorPic/2"
+        /// POST: api/ActorData/UpdateMoviePic/3
+        /// HEADER: enctype=multipart/form-data
+        /// FORM-DATA: image
+        /// </example>
+        /// https://stackoverflow.com/questions/28369529/how-to-set-up-a-web-api-controller-for-multipart-form-data
+
+        [HttpPost]
+        public IHttpActionResult UpdateActorPic(int id)
+        {
+
+            bool haspic = false;
+            string picextension;
+            if (Request.Content.IsMimeMultipartContent())
+            {
+                int numfiles = HttpContext.Current.Request.Files.Count;
+
+                //Check if a file is posted
+                if (numfiles == 1 && HttpContext.Current.Request.Files[0] != null)
+                {
+                    var ActorPic = HttpContext.Current.Request.Files[0];
+                    //Check if the file is empty
+                    if (ActorPic.ContentLength > 0)
+                    {
+                        var valtypes = new[] { "jpeg", "jpg", "png", "gif" };
+                        var extension = Path.GetExtension(ActorPic.FileName).Substring(1);
+                        //Check the extension of the file
+                        if (valtypes.Contains(extension))
+                        {
+                            try
+                            {
+                                //file name is the id of the image
+                                string fn = id + "." + extension;
+
+                                //get a direct file path to ~/Content/Actors/{id}.{extension}
+                                string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/Actors/"), fn);
+
+                                //save the file
+                                ActorPic.SaveAs(path);
+
+                                //if these are all successful then we can set these fields
+                                haspic = true;
+                                picextension = extension;
+
+                                //Update the Actor haspic and picextension fields in the database
+                                Actor SelectedActor = db.Actors.Find(id);
+                                SelectedActor.ActorHasPic = haspic;
+                                SelectedActor.PicExtension = extension;
+                                db.Entry(SelectedActor).State = EntityState.Modified;
+
+                                db.SaveChanges();
+
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine("Actor Image was not saved successfully.");
+                                Debug.WriteLine("Exception:" + ex);
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            return Ok();
+        }
+
 
         /// curl -H "Content-Type:application/json" 
         /// -d @UpdatedActor.json "https://localhost:44301/api/ActorData/UpdateActor/14"
@@ -233,6 +317,9 @@ namespace MovieBlog.Controllers
             }
 
             db.Entry(Actor).State = EntityState.Modified;
+            // Picture update is handled by another method
+            db.Entry(Actor).Property(p => p.ActorHasPic).IsModified = false;
+            db.Entry(Actor).Property(p => p.PicExtension).IsModified = false;
 
             try
             {
@@ -296,6 +383,16 @@ namespace MovieBlog.Controllers
             if (actor == null)
             {
                 return NotFound();
+            }
+            if (actor.ActorHasPic && actor.PicExtension != "")
+            {
+                //also delete image from path
+                string path = HttpContext.Current.Server.MapPath("~/Content/Actors/" + id + "." + actor.PicExtension);
+                if (System.IO.File.Exists(path))
+                {
+                    Debug.WriteLine("File exists... preparing to delete!");
+                    System.IO.File.Delete(path);
+                }
             }
 
             db.Actors.Remove(actor);

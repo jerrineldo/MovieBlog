@@ -3,11 +3,45 @@
     ViewBag.Title = "ListMovies";
 }
 
-<h2>List of Movies</h2>
+<h2 class="center">List of Movies</h2>
+<div class="center">
+    @Html.ActionLink("Create New Movie", "Create", "Movie", new { }, null)
+</div>
+
+@foreach (var item in Model)
+{
+    //Use server rendering to determine an image
+    string pic = "/Content/Movies/default.jpg";
+    string alt = "No Profile Picture Provided.";
+    if (item.MovieHasPic)
+    {
+        pic = "/Content/Movies/" + item.MovieID + "." + item.PicExtension;
+        alt = "Picture of " + item.Title;
+    }
+    <div class="movie">
+        <div class="imagecontainer">
+            <a href="@pic" title="@alt">
+                <img src="@pic" alt="@alt" />
+            </a>
+        </div>
+        <div class="moviename"><h4>@item.Title  <span>(@item.YearReleased)</span></h4></div>
+        <div class="moviereview">@item.Review</div>
+        <div class="admintab">
+            @Html.ActionLink("Edit", "UpdateMovie", "Movie", new { id = item.MovieID }, null) |
+            @Html.ActionLink("Details", "MovieDetails", "Movie", new { id = item.MovieID }, null)
+        </div>
+
+    </div>
+}
+
+@*<h2>List of Movies</h2>
 @Html.ActionLink("Create New Movie", "Create", "Movie", new { }, null)
 
 <table class="table">
     <tr>
+        <th>
+            Picture
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
@@ -22,8 +56,22 @@
 
     @foreach (var item in Model)
     {
+        //Use server rendering to determine an image
+        string pic = "/Content/Movies/default.jpg";
+        string alt = "No Profile Picture Provided.";
+        if (item.MovieHasPic)
+        {
+            pic = "/Content/Movies/" + item.MovieID + "." + item.PicExtension;
+            alt = "Picture of " + item.Title;
+        }
         <tr>
-
+            <td>
+                <div class="imagecontainer">
+                    <a href="@pic" title="@alt">
+                        <img src="@pic" alt="@alt" />
+                    </a>
+                </div>
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
@@ -34,9 +82,9 @@
                 @Html.DisplayFor(modelItem => item.Review)
             </td>
             <td>
-                @Html.ActionLink("Edit", "ActorDetails", "Actor", new { id = item.MovieID }, null)
+                @Html.ActionLink("Edit", "UpdateMovie", "Movie", new { id = item.MovieID }, null)
                 @Html.ActionLink("Details", "MovieDetails", "Movie", new { id = item.MovieID }, null)
             </td>
         </tr>
     }
-</table>
+</table>*@

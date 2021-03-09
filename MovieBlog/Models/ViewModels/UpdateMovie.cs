@@ -14,5 +14,9 @@ namespace MovieBlog.Models.ViewModels
         public IEnumerable<ActorDto> ActorsinMovie { get; set; }
 
         public IEnumerable<ActorDto> PotentialActors { get; set; }
+
+        public IEnumerable<GenreDto> GenresOfMovie { get; set; }
+
+        public IEnumerable<GenreDto> PotentialGenresOfMovie { get; set; }
     }
 }

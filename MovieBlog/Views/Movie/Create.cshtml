@@ -3,24 +3,36 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create Movie</h2>
+<h2 class="center">Create Movie</h2>
 
 @Html.ActionLink("Back to List", "ListMovies", "Movie", new { }, null)
 
-<form action="/Movie/Create" method="POST" name="movieform">
-    <label for="">Enter the Title :</label>
-    <input id="Title" name="Title" type="text" />
-    <label for="">Enter the year released : </label>
-    <input id="Yearreleased" name="YearReleased" type="text" />
-    <label for="">Review:</label>
-    <textarea id="Review" name="Review"></textarea>
-    <label>Select the Director : </label>
-    <select name="DirectorID">
+<div class="updateactor">
+    <form action="/Movie/Create" method="POST" name="movieform">
+        <div class="form_inputfield center">
+            <label for="Title">Title :</label>
+            <input id="Title" name="Title" type="text" />
+        </div>
+        <div class="form_inputfield center">
+            <label for="Yearreleased">Year : </label>
+            <input id="Yearreleased" name="YearReleased" type="text" />
+        </div>
+        <div class="form_inputfield center">
+            <label for="Review">Review:</label>
+            <textarea id="Review" name="Review"></textarea>
+        </div>
+        <div class="form_inputfield center">
+            <label for="DirectorID">Select the Director : </label>
+            <select name="DirectorID" id="DirectorID">
                 @foreach (var director in Model.Directors)
                 {
                     <option value="@director.DirectorID">@director.FirstName @director.LastName</option>
                 }
 
-    </select>
-    <input type="submit" value="Create Actor" />
-</form>
+            </select>
+        </div>
+        <div class="form_inputfield center">
+            <input type="submit" value="Create Movie" />
+        </div>
+    </form>
+</div>

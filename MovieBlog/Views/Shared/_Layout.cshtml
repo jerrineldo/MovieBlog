@@ -9,7 +9,22 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <header>
+        <div id="banner" class="main-banner">
+        </div>
+        <!--Navbar items-->
+        <nav class="main-navigation">
+            <ul>
+                <li class="inline">@Html.ActionLink("Actors", "ListActors", "Actor")</li>
+                <li class="inline">@Html.ActionLink("Directors", "ListDirectors", "Director")</li>
+                <li class="inline">@Html.ActionLink("Movies", "ListMovies", "Movie")</li>
+                <li class="inline">@Html.ActionLink("Genres", "ListGenres", "Genre")</li>
+            </ul>
+        </nav>
+    </header>
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div id="banner" class="main-banner">
+        </div>
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,23 +32,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Movie Blog", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Actors", "ListActors", "Actor")</li>
+                    <li>@Html.ActionLink("Directors", "ListDirectors", "Director")</li>
+                    <li>@Html.ActionLink("Movies", "ListMovies", "Movie")</li>
+                    <li>@Html.ActionLink("Genres", "ListGenres", "Genre")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
-    </div>
+    </div>*@
+
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Jerrin's Movie Blog</p>
         </footer>
     </div>
 

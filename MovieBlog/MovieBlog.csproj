@@ -183,7 +183,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActorController.cs" />
     <Compile Include="Controllers\ActorDataController.cs" />
+    <Compile Include="Controllers\DirectorController.cs" />
     <Compile Include="Controllers\DirectorDataController.cs" />
+    <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\GenreDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -196,6 +198,14 @@
     <Compile Include="Migrations\202102130319447_Movie-February12.designer.cs">
       <DependentUpon>202102130319447_Movie-February12.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103070831175_March7.cs" />
+    <Compile Include="Migrations\202103070831175_March7.Designer.cs">
+      <DependentUpon>202103070831175_March7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103071852418_Jerrin.cs" />
+    <Compile Include="Migrations\202103071852418_Jerrin.Designer.cs">
+      <DependentUpon>202103071852418_Jerrin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Actor.cs" />
@@ -205,6 +215,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\ViewModels\ShowActor.cs" />
+    <Compile Include="Models\ViewModels\ShowDirector.cs" />
     <Compile Include="Models\ViewModels\ShowMovie.cs" />
     <Compile Include="Models\ViewModels\UpdateMovie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -275,9 +286,24 @@
     <Content Include="Views\Movie\ListMovies.cshtml" />
     <Content Include="Views\Movie\Create.cshtml" />
     <Content Include="Views\Movie\MovieDetails.cshtml" />
+    <Content Include="Views\Movie\Error.cshtml" />
+    <Content Include="Views\Movie\UpdateMovie.cshtml" />
+    <Content Include="Views\Movie\DeleteConfirm.cshtml" />
+    <Content Include="Views\Director\ListDirectors.cshtml" />
+    <Content Include="Views\Director\Create.cshtml" />
+    <Content Include="Views\Director\Error.cshtml" />
+    <Content Include="Views\Director\UpdateDirector.cshtml" />
+    <Content Include="Views\Director\DirectorDetails.cshtml" />
+    <Content Include="Views\Director\DeleteConfirm.cshtml" />
+    <Content Include="Views\Genre\ListGenres.cshtml" />
+    <Content Include="Views\Genre\Create.cshtml" />
+    <Content Include="Views\Genre\Error.cshtml" />
+    <Content Include="Views\Genre\UpdateGenre.cshtml" />
+    <Content Include="Views\Genre\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Movies\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -295,6 +321,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202102130319447_Movie-February12.resx">
       <DependentUpon>202102130319447_Movie-February12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103070831175_March7.resx">
+      <DependentUpon>202103070831175_March7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103071852418_Jerrin.resx">
+      <DependentUpon>202103071852418_Jerrin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

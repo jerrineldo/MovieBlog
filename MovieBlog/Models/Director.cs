@@ -14,6 +14,8 @@ namespace MovieBlog.Models
         public string LastName { get; set; }
         public string Country { get; set; }
         public string Bio { get; set; }
+        public bool DirectorHasPic { get; set; }
+        public string PicExtension { get; set; }
         public ICollection<Movie> Movies { get; set; }
     }
 
@@ -26,5 +28,7 @@ namespace MovieBlog.Models
         public string LastName { get; set; }
         public string Country { get; set; }
         public string Bio { get; set; }
+        public bool DirectorHasPic { get; set; }
+        public string PicExtension { get; set; }
     }
 }

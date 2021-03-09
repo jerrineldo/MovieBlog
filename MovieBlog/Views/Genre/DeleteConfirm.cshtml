@@ -1,0 +1,23 @@
+﻿@model MovieBlog.Models.GenreDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+
+<h3>Are you sure you want to delete this Genre?</h3>
+<div>
+    <dl>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenreName) :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GenreName)
+        </dd>
+
+    </dl>
+    <form action="/Genre/DeleteGenre/@Model.GenreID" method="POST">
+        <input type="submit" value="Delete" />
+    </form>
+    @Html.ActionLink("Back to List", "ListGenres", "Genre", new { }, null)
+</div>

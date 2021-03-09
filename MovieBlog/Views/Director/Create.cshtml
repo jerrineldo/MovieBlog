@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 class="center">New Director</h2>
+
+@Html.ActionLink("Back to List", "ListDirectors", "Director", new { }, null)
+
+<div class="updateactor">
+    <form action="/Director/Create" method="POST" name="directorForm">
+        <div class="form_inputfield center">
+            <label for="">First Name :</label>
+            <input id="FirstName" name="FirstName" type="text" />
+        </div>
+        <div class="form_inputfield center">
+            <label for="">Last Name : </label>
+            <input id="LastName" name="LastName" type="text" />
+        </div>
+        <div class="form_inputfield center">
+            <label for="">Country : </label>
+            <input id="Country" name="Country" type="text" />
+        </div>
+        <div class="form_inputfield center">
+            <label for="">Bio:</label>
+            <textarea id="Bio" name="Bio"></textarea>
+        </div>
+        <div class="form_inputfield center">
+            <input type="submit" value="Create Director" />
+        </div>
+    </form>
+</div>
+

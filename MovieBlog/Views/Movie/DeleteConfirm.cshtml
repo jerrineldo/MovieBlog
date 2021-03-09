@@ -1,0 +1,36 @@
+﻿@model MovieBlog.Models.MovieDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+
+<h3>Are you sure you want to delete this Movie?</h3>
+<div>
+    <dl>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title) :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.YearReleased) :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.YearReleased)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Review) :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Review)
+        </dd>
+
+    </dl>
+    <form action="/Movie/DeleteMovie/@Model.MovieID" method="POST">
+        <input type="submit" value="Delete" />
+    </form>
+    @Html.ActionLink("Back to List", "ListMovies", "Movie", new { }, null)
+</div>

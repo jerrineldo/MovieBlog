@@ -4,59 +4,74 @@
 }
 
 <h2>Actor : @Model.Actor.FirstName @Model.Actor.LastName</h2>
-@Html.ActionLink("Back to List", "ListActors", "Actor", new { }, null) |
-@Html.ActionLink("Edit", "ActorDetails", "Actor", new { id = Model.Actor.ActorID }, null) |
-@Html.ActionLink("Delete", "DeleteConfirm", "Actor", new { id = Model.Actor.ActorID }, null)
 
-<form action="/actor/create" method="POST" name="actorform">
-    <label for="actorform__firstname">Enter the first name :</label>
-    <input id="FirstName" name="FirstName" type="text" value="@Model.Actor.FirstName" />
-    <label for="actorform__lastname">Enter the last name :</label>
-    <input id="LastName" name="LastName" type="text" value="@Model.Actor.LastName" />
-    <label for="actorform__country">Country :</label>
-    <input id="Country" name="Country" type="text" value="@Model.Actor.Country" />
-    <label for="actorform__actorreview">Review:</label>
-    <textarea id="Bio" name="Bio">@Model.Actor.Bio</textarea>
-</form>
-<div>
-    <h4>Acted Movies:</h4>
-    <div>
-        @foreach (var movie in Model.MoviesActed)
-        {
-            <div>
-                @Html.ActionLink(
-                movie.Title,
-                "Details",
-                "Movie",
-                new { id = movie.MovieID },
-                new { })
-
-                @Html.ActionLink(
-               "[x]",
-               "RemoveMovieforActor",
-               "Actor",
-               new { MovieId = movie.MovieID, ActorId = Model.Actor.ActorID },
-               new { @class = "text-danger" })
+<div class="details">
+    <div class="left">
+        <h4 class="center underline">Actor Details</h4>
+        <form action="/actor/create" method="POST" name="actorform">
+            <div class="form_inputfield center">
+                <label for="FirstName">First name :</label>
+                <input id="FirstName" name="FirstName" type="text" readonly value="@Model.Actor.FirstName" />
             </div>
-        }
-    </div>
-
-    <h3>Add Movies Acted : </h3>
-    <div>
-        <form method="POST" action="/Actor/AddMovieforActor">
-            <select name="MovieId">
-                @foreach (var movie in Model.PotentialMovies)
-                {
-                    <option value="@movie.MovieID">@movie.Title</option>
-                }
-
-            </select>
-            <input type="number" name="ActorId" value="@Model.Actor.ActorID" style="display:none;" />
-            <input type="submit" value="Add Movie" />
+            <div class="form_inputfield center">
+                <label for="actorform__lastname">Last name :</label>
+                <input id="LastName" name="LastName" type="text" readonly value="@Model.Actor.LastName" />
+            </div>
+            <div class="form_inputfield center">
+                <label for="actorform__country">Country :</label>
+                <input id="Country" name="Country" type="text" readonly value="@Model.Actor.Country" />
+            </div>
+            <div class="form_inputfield center">
+                <label for="actorform__actorreview">Review  :</label>
+                <textarea id="Bio" readonly name="Bio">@Model.Actor.Bio</textarea>
+            </div>
         </form>
     </div>
+    <div class="actedmovies">
+        <h4 class="center underline">Acted Movies</h4>
+        <div>
+            @foreach (var movie in Model.MoviesActed)
+            {
+                <div>
+                    @Html.ActionLink(
+                    movie.Title,
+                    "MovieDetails",
+                    "Movie",
+                    new { Id = movie.MovieID },
+                    new { })
 
+                    @Html.ActionLink(
+                   "[x]",
+                   "RemoveMovieforActor",
+                   "Actor",
+                   new { MovieId = movie.MovieID, ActorId = Model.Actor.ActorID },
+                   new { @class = "text-danger" })
+                </div>
+            }
+        </div>
+
+        <h3>Add Movies Acted : </h3>
+        <div>
+            <form method="POST" action="/Actor/AddMovieforActor">
+                <select name="MovieId">
+                    @foreach (var movie in Model.PotentialMovies)
+                    {
+                        <option value="@movie.MovieID">@movie.Title</option>
+                    }
+
+                </select>
+                <input type="number" name="ActorId" value="@Model.Actor.ActorID" style="display:none;" />
+                <div class="form_inputfield center">
+                    <input type="submit" value="Add Movie" />
+                </div>
+            </form>
+        </div>
+        <div class="center">
+            @Html.ActionLink("Back to List", "ListActors", "Actor", new { }, null) |
+            @Html.ActionLink("Edit", "ActorDetails", "Actor", new { id = Model.Actor.ActorID }, null) |
+            @Html.ActionLink("Delete", "DeleteConfirm", "Actor", new { id = Model.Actor.ActorID }, null)
+        </div>
+    </div>
 </div>
-
 
 

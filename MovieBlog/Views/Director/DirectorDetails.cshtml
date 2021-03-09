@@ -1,0 +1,55 @@
+﻿@model MovieBlog.Models.ViewModels.ShowDirector
+@{
+    ViewBag.Title = "DirectorDetails";
+}
+
+<h2>Director : @Model.Director.FirstName @Model.Director.LastName</h2>
+
+
+
+<div class="details">
+    <div class="left">
+        <h4 class="center underline">Actor Details</h4>
+        <form action="/Director/UpdateDirector/@Model.Director.DirectorID" method="POST" name="directorForm">
+            <div class="form_inputfield center">
+                <label for="">First Name :</label>
+                <input id="FirstName" name="FirstName" type="text" readonly value="@Model.Director.FirstName" />
+            </div>
+            <div class="form_inputfield center">
+                <label for="">Last Name : </label>
+                <input id="LastName" name="LastName" type="text" readonly value="@Model.Director.LastName" />
+            </div>
+            <div class="form_inputfield center">
+                <label for="">Country : </label>
+                <input id="Country" name="Country" type="text" readonly value="@Model.Director.Country" />
+            </div>
+            <div class="form_inputfield center">
+                <label for="">Bio :</label>
+                <textarea id="Bio" readonly name="Bio">@Model.Director.Bio</textarea>
+            </div>
+            <input type="number" name="DirectorID" value="@Model.Director.DirectorID" style="display:none;" />
+
+        </form>
+    </div>
+    <div class="actedmovies">
+        <h4 class="center underline">Movies  Directed  </h4>
+        <div>
+            @foreach (var movie in Model.MoviesDirected)
+            {
+                <div>
+                    @Html.ActionLink(
+                    movie.Title,
+                    "MovieDetails",
+                    "Movie",
+                    new { Id = movie.MovieID },
+                    new { })
+                </div>
+            }
+        </div>
+        <div class="center">
+            @Html.ActionLink("Back to List", "ListDirectors", "Director", new { }, null) |
+            @Html.ActionLink("Edit", "UpdateDirector", "Director", new { id = Model.Director.DirectorID }, null) |
+            @Html.ActionLink("Delete", "DeleteConfirm", "Director", new { id = Model.Director.DirectorID }, null)
+        </div>
+    </div>
+</div>

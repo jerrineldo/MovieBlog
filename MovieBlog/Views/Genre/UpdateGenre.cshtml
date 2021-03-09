@@ -1,0 +1,16 @@
+﻿@model MovieBlog.Models.GenreDto
+
+@{
+    ViewBag.Title = "UpdateGenre";
+}
+
+@Html.ActionLink("Back to List", "ListGenres", "Genre", new { }, null)
+
+<h2>Update Genre</h2>
+
+<form action="/Genre/UpdateGenre/@Model.GenreID" method="POST" name="genreForm">
+    <label for="">Enter the Genre Name :</label>
+    <input id="GenreName" name="GenreName" type="text" value="@Model.GenreName" />
+    <input type="number" name="GenreID" value="@Model.GenreID" style="display:none;" />
+    <input type="submit" value="Update Genre" />
+</form>

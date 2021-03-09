@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MovieBlog.Models.GenreDto>
+
+@{
+    ViewBag.Title = "ListGenres";
+}
+
+<h2 class="center">List of Genres</h2>
+<div class="center">
+    @Html.ActionLink("Create New Genre", "Create", "Genre", new { }, null)
+</div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GenreName)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.GenreName)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "UpdateGenre", "Genre", new { id = item.GenreID }, null) |
+                    @Html.ActionLink("Delete", "DeleteConfirm", "Genre", new { id = item.GenreID }, null)
+                </td>
+            </tr>
+        }
+    </table>
+
